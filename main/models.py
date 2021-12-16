@@ -5,6 +5,7 @@ from account.models import MyUser
 class Post(models.Model):
     author = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='posts')
     title = models.CharField(max_length=50, verbose_name="Title")
+    url = models.SlugField(max_length=150, unique=True)
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True, verbose_name="Created date")
 
