@@ -1,8 +1,9 @@
 from django.db import models
 from account.models import MyUser
+from vote.models import VoteModel
 
 
-class Post(models.Model):
+class Post(VoteModel, models.Model):
     author = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='posts')
     title = models.CharField(max_length=50, verbose_name="Title")
     url = models.SlugField(max_length=150, unique=True)
