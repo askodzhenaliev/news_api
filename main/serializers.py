@@ -7,7 +7,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'category', 'title', 'text', 'created_date', 'article_image')
+        fields = ('id', 'title', 'url', 'text', 'created_date')
 
     def create(self, validated_data):
         request = self.context.get('request')

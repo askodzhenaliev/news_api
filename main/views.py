@@ -1,9 +1,11 @@
 from django.db.models import Q
+from django.shortcuts import render
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, BasePermission
 from rest_framework.response import Response
 from .permissions import IsPostAuthor
+from django.utils import timezone
 
 from .models import Post, Comment
 from .serializers import *
@@ -52,4 +54,7 @@ class PostViewSet(viewsets.ModelViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+def post_list(request):
+    posts = Post.objects.filter(created_date__lte=timezone.now()).order_by('created_date')
+    return render(request, 'post_list.html', {'posts': posts})
 
